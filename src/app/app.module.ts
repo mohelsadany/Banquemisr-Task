@@ -8,6 +8,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { FavoritePageComponent } from './favorite-page/favorite-page.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { AuthorDetailsComponent } from './author-details/author-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AuthorDetailsComponent } from './author-details/author-details.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
