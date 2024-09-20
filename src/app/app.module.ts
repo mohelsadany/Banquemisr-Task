@@ -3,10 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
+import { FavoritePageComponent } from './favorite-page/favorite-page.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import { AuthorDetailsComponent } from './author-details/author-details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    SearchPageComponent,
+    FavoritePageComponent,
+    BookDetailsComponent,
+    AuthorDetailsComponent
   ],
   imports: [
     BrowserModule,
