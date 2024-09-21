@@ -1,7 +1,7 @@
 <div *ngIf="book; else loadingTemplate">
   <h2>{{ book.title }}</h2>
   <p>First Published: {{ book.first_publish_year }}</p>
-  <p>Author: {{ book.authors[0].name }}</p>
+  <p>Author: <a [routerLink]="['/author', book.authors[0].key.split('/').pop()]">{{ book.authors[0].name }}</a></p>
   <p>Editions Count: {{ book.edition_count }}</p>
   <p>Number of Pages: {{ book.number_of_pages }}</p>
 </div>

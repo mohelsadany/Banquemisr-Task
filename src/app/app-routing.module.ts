@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'search', component: SearchPageComponent },
   { path: 'favorite', component: FavoritePageComponent },
   { path: 'book/:id', component: BookDetailsComponent },
-  { path: 'author/:id', component: AuthorDetailsComponent }
+    { path: 'author/:id', component: AuthorDetailsComponent }
 ];
 
 @NgModule({

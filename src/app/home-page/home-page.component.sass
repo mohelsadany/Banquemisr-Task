@@ -1,19 +1,42 @@
-.book
-  border: 1px solid #ccc
+.grid-container
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+  gap: 20px
+  padding: 20px
+
+.book-card
+  display: flex
+  flex-direction: column
+  align-items: center
+  border: 1px solid #ddd
+  border-radius: 8px
+  overflow: hidden
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+
+.book-cover
+  width: 100%
+  height: 300px
+  object-fit: cover
+
+.book-info
   padding: 10px
-  margin: 10px
-  width: 30%
-  display: inline-block
-  vertical-align: top
-  img
-    width: 100px
-    height: 150px
-    object-fit: cover
-  .title
-    font-size: 1.2em
-    font-weight: bold
-  .author
-    font-size: 1em
-  .price
-    font-size: 1.2em
-    font-weight: bold
+  text-align: center
+
+.book-title
+  font-size: 18px
+  font-weight: bold
+  color: #333
+
+.book-published, .book-subject
+  font-size: 14px
+  color: #666
+
+.author-link
+  display: block
+  color: #0066cc
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+.book-authors
+  margin-top: 5px

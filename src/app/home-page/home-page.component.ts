@@ -12,8 +12,19 @@ export class HomePageComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.bookService.getBooksBySubject('finance').subscribe(data => {
-      this.books = data.works.slice(0, 9);
+    this.bookService.getBooksBySubject('finance').subscribe({
+      next: (data) => {
+        if (data && data.works) {
+          this.books = data.works.slice(0, 9);
+        } else {
+          console.error('No books returned from API.');
+          this.books = [];
+        }
+        console.log('Books loaded successfully:', this.books);
+      },
+      error: (error) => {
+        console.error('Failed to fetch books:', error);
+      }
     });
   }
 }

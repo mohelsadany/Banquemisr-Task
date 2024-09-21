@@ -1,1 +1,9 @@
-<p>author-details works!</p>
+<div *ngIf="author; else loadingTemplate">
+  <h2>{{ author.name }}</h2>
+  <p>Birth Date: {{ author.birth_date }}</p>
+  <p>Top Subjects: <span *ngFor="let subject of author.top_subjects | slice:0:5">{{ subject }}, </span></p>
+  <p>Total Works: {{ author.work_count }}</p>
+</div>
+<ng-template #loadingTemplate>
+  <p>Loading author details...</p>
+</ng-template>

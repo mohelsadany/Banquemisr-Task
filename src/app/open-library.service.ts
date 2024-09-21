@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
-})
+  providedIn: 'root'})
 export class BookService {
-  private apiUrl = 'https://openlibrary.org/subjects/';
+  private baseUrl = 'https://openlibrary.org';
 
   constructor(private http: HttpClient) { }
 
   getBooksBySubject(subject: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}${subject}.json`)
-      .pipe(
-        catchError(error => {
-          throw 'error in getting books: ' + error;
-        })
-      );
+    return this.http.get(`${this.baseUrl}/subjects/${subject}.json`);
   }
 
   getBookDetails(bookKey: string): Observable<any> {
-    return this.http.get(`https://openlibrary.org${bookKey}.json`);
+    // Ensure there's a slash before the bookKey
+    if (!bookKey.startsWith('/')) {
+      bookKey = '/' + bookKey;
+    }
+    return this.http.get(`${this.baseUrl}${bookKey}.json`);
+  }
+
+  getAuthorDetails (authorKey: string): Observable<any> {
+    // Ensure there's a slash before the authorKey
+    if (!authorKey.startsWith('/')) {
+      authorKey = '/' + authorKey;
+    }
+    return this.http.get(`${this.baseUrl}${authorKey}.json`);
   }
 }
