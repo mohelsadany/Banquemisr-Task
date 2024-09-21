@@ -9,6 +9,8 @@ import { FavoritePageComponent } from './favorite-page/favorite-page.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { AuthorDetailsComponent } from './author-details/author-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

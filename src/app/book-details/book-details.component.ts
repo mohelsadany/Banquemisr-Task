@@ -8,16 +8,26 @@ import { BookService } from '../open-library.service';
   styleUrls: ['./book-details.component.sass']
 })
 export class BookDetailsComponent implements OnInit {
-  book: any;
+  book: any = null;  // Initialize to null to handle conditional rendering
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.bookService.getBookDetails(params['id']).subscribe(data => {
-        this.book = data;
-      }, error => {
-        console.error('Failed to fetch book details:', error);
+      this.bookService.getBookDetails('/works/' + params['id']).subscribe({
+        next: (data) => {
+          this.book = {
+            title: data.title,
+            authors: data.authors || [{ name: 'Unknown' }],
+            cover_id: data.cover_id,
+            publish_year: data.first_publish_year,
+            subjects: data.subjects || [],
+            description: data.description ? data.description.value || data.description : 'No description available.'
+          };
+        },
+        error: (error) => {
+          console.error('Failed to fetch book details:', error);
+        }
       });
     });
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -27,5 +27,17 @@ export class BookService {
       authorKey = '/' + authorKey;
     }
     return this.http.get(`${this.baseUrl}${authorKey}.json`);
+  }
+
+  searchBooks(term: string, sort: string = 'relevance', filter?: string): Observable<any> {
+    let params = new HttpParams()
+      .set('q', term)
+      .set('sort', sort);
+
+    if (filter) {
+      params = params.set('subject', filter);
+    }
+
+    return this.http.get(`${this.baseUrl}/search.json`, { params });
   }
 }

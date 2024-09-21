@@ -15,7 +15,15 @@ export class HomePageComponent implements OnInit {
     this.bookService.getBooksBySubject('finance').subscribe({
       next: (data) => {
         if (data && data.works) {
-          this.books = data.works.slice(0, 9);
+          this.books = data.works.map(work => ({
+            title: work.title,
+            cover_id: work.cover_id,
+            key: work.key,
+            edition_count: work.edition_count,
+            first_publish_year: work.first_publish_year,
+            authors: work.authors,
+            subject: work.subject.slice(0, 5)  // Taking first 5 subjects
+          })).slice(0, 9);
         } else {
           console.error('No books returned from API.');
           this.books = [];

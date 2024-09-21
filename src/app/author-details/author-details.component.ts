@@ -8,16 +8,25 @@ import { BookService } from '../open-library.service';
   styleUrls: ['./author-details.component.sass']
 })
 export class AuthorDetailsComponent implements OnInit {
-  author: any;
+  author: any = null;  // Initialize to null for conditional rendering
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.bookService.getAuthorDetails(`/authors/${params['id']}`).subscribe(data => {
-        this.author = data;
-      }, error => {
-        console.error('Failed to fetch author details:', error);
+      this.bookService.getAuthorDetails(`/authors/${params['id']}`).subscribe({
+        next: (data) => {
+          this.author = {
+            name: data.name,
+            bio: data.bio ? data.bio.value || data.bio : 'No biography available.',
+            birth_date: data.birth_date || 'Unknown',
+            top_works: data.top_works || [],
+            subjects: data.subjects || []
+          };
+        },
+        error: (error) => {
+          console.error('Failed to fetch author details:', error);
+        }
       });
     });
   }

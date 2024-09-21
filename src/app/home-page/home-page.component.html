@@ -2,35 +2,19 @@
   <div class="grid-container">
     <div *ngFor="let book of books" class="book-card">
       <a [routerLink]="['/book', book.key.split('/').pop()]">
-        <img
-          [src]="
-            book.cover_id
-              ? 'http://covers.openlibrary.org/b/id/' + book.cover_id + '-M.jpg'
-              : 'assets/placeholder.jpg'
-          "
-          alt="{{ book.title }}"
-        />
+        <img [src]="book.cover_id ? 'http://covers.openlibrary.org/b/id/' + book.cover_id + '-M.jpg' : 'assets/placeholder.jpg'" alt="{{ book.title }}" class="book-cover">
       </a>
       <div class="book-info">
-        <a
-          [routerLink]="['/book', book.key.split('/').pop()]"
-          class="book-title"
-          >{{ book.title }}</a
-        >
-        <p
-          class="book-published"
-          *ngIf="book.publish_date && book.publish_date.length"
-        >
-          Published: {{ book.publish_date[0] }}
-        </p>
-        <div class="book-authors" *ngIf="book.authors && book.authors.length">
+        <a [routerLink]="['/book', book.key.split('/').pop()]" class="book-title">{{ book.title }}</a>
+        <p class="book-editions">Editions: {{ book.edition_count }}</p>
+        <p class="book-year">First Published: {{ book.first_publish_year }}</p>
+        <div class="book-authors">
           <span *ngFor="let author of book.authors">
-            <a
-              [routerLink]="['/author', author.key.split('/').pop()]"
-              class="author-link"
-              >{{ author.name }}</a
-            >
+            <a [routerLink]="['/author', author.key.split('/').pop()]" class="author-link">{{ author.name }}</a>
           </span>
+        </div>
+        <div class="book-subjects">
+          <span *ngFor="let subject of book.subject" class="book-subject">{{ subject }}</span>
         </div>
       </div>
     </div>
