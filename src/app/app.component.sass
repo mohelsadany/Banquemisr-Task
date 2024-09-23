@@ -1,16 +1,25 @@
 nav
   background-color: #f8f9fa
-  padding: 1rem
+  padding: 1.5rem 2rem // Increased padding for better spacing
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) // Added subtle shadow for depth
+
   ul
     list-style: none
     padding: 0
     margin: 0
     display: flex
     justify-content: center
+    align-items: center // Added to vertically center items
+
   li
-    margin: 0 10px
+    margin: 0 15px // Increased margin between items
+
   a
     text-decoration: none
     color: #333
+    font-weight: 500 // Added slightly bolder font
+    transition: color 0.3s ease // Smooth transition for hover effect
+
     &:hover
-      text-decoration: underline
+      color: #007bff // Changed to a blue color instead of underline
+      text-decoration: none // Removed underline on hover

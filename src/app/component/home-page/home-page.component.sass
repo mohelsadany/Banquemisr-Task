@@ -1,0 +1,108 @@
+// i need to add styles for the book card and the book info
+
+// i need to add styles for the book card and the book info
+
+
+.grid-container
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+  gap: 20px
+  padding: 20px
+
+.book-card
+  display: flex
+  flex-direction: column
+  align-items: center
+  border: 1px solid #ddd
+  border-radius: 12px
+  overflow: hidden
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  transition: transform 0.3s ease, box-shadow 0.3s ease
+  background-color: #fff
+
+  &:hover
+    transform: translateY(-5px)
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15)
+
+.book-cover
+  width: 100%
+  height: 300px
+  object-fit: cover
+  border-bottom: 1px solid #eee
+
+.book-info
+  padding: 15px
+  text-align: center
+  width: 100%
+
+.book-title
+  font-size: 20px
+  font-weight: bold
+  color: #333
+  margin-bottom: 10px
+  line-height: 1.2
+
+.book-editions, .book-year
+  font-size: 14px
+  color: #666
+  margin-bottom: 5px
+
+.author-link, .book-subject
+  display: inline-block
+  color: #0066cc
+  text-decoration: none
+  font-size: 14px
+  margin: 2px
+  padding: 2px 5px
+  border-radius: 4px
+  background-color: #f0f8ff
+  transition: background-color 0.2s ease
+
+  &:hover
+    text-decoration: none
+    background-color: #e6f2ff
+
+.book-subjects
+  display: flex
+  flex-wrap: wrap
+  gap: 5px
+  justify-content: center
+  margin-top: 10px
+
+.book-authors
+  margin-top: 10px
+  font-style: italic
+  color: #444
+
+.pagination
+  display: flex
+  justify-content: center
+  margin-top: 20px
+  margin-bottom: 20px
+  gap: 10px
+
+
+button
+  padding: 5px 10px
+  margin: 0 5px
+  cursor: pointer
+  &:disabled
+    cursor: default
+    opacity: 0.5
+.loader
+  border: 6px solid #f3f3f3
+  border-radius: 50%
+  border-top: 6px solid #3498db
+  width: 60px
+  height: 60px
+  animation: spin 1s linear infinite
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+@keyframes spin
+  0%
+    transform: translate(-50%, -50%) rotate(0deg)
+  100%
+    transform: translate(-50%, -50%) rotate(360deg)

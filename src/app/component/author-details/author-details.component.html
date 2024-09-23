@@ -1,0 +1,20 @@
+<div *ngIf="author; else loading">
+  <div class="author-detail-card">
+    <h2>{{ author.name }}</h2>
+    <p><strong>Birth Date:</strong> {{ author.birth_date }}</p>
+    <p><strong>Biography:</strong> {{ author.bio }}</p>
+    <div>
+      <h3>Top Works:</h3>
+      <ul>
+        <li *ngFor="let work of author.top_works">{{ work.title }}</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Subjects:</h3>
+      <span *ngFor="let subject of author.subjects">{{ subject }}, </span>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <p>Loading author details...</p>
+</ng-template>

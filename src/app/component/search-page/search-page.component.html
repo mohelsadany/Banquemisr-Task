@@ -1,0 +1,24 @@
+<form (submit)="performSearch(searchTerm.value)">
+  <input type="text" #searchTerm placeholder="Enter search term..." />
+
+  <!-- <select [(ngModel)]="sortOption" name="sort">
+    <option value="relevance">Relevance</option>
+    <option value="new">Newest</option>
+    <option value="old">Oldest</option>
+  </select>
+
+  <select [(ngModel)]="filterSubject" name="filter">
+    <option value="">All Subjects</option>
+    <option value="Fiction">Fiction</option>
+    <option value="Science">Science</option>
+    <option value="History">History</option>
+  </select> -->
+
+  <button type="submit">Search</button>
+</form>
+
+<div *ngIf="searchResults">
+  <div *ngFor="let book of searchResults">
+    <p>{{ book.title }} by {{ book.author_name.join(', ') }}</p>
+  </div>
+</div>
