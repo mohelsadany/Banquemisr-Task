@@ -5,7 +5,7 @@
     <div class="grid-container">
       <article *ngFor="let book of books" class="book-card">
         <a [routerLink]="['/book', book.key.split('/').pop()]" class="book-cover-link">
-          <img [src]="book.cover_id ? 'http://covers.openlibrary.org/b/id/' + book.cover_id + '-M.jpg' : 'assets/placeholder.jpg'"
+          <img [src]="book.cover_id ? 'http://covers.openlibrary.org/b/id/' + book.cover_id + '-M.jpg' : 'assets/images/no-photo.jpg'"
                [alt]="'Cover of ' + book.title"
                class="book-cover"
                loading="lazy">
@@ -30,6 +30,9 @@
             </ul>
           </div>
         </div>
+        <button (click)="toggleFavorite(book)" [class.favorited]="book.isFavorite">
+          <i class="fa" [class.fa-heart]="book.isFavorite" [class.fa-heart-o]="!book.isFavorite"></i>
+        </button>
       </article>
     </div>
 

@@ -6,3 +6,49 @@
 
 button
   margin-top: 5px
+
+.favorites-container
+  max-width: 800px
+  margin: 0 auto
+  padding: 20px
+  background-color: #f9f9f9
+  border-radius: 10px
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+
+.favorites-list
+  margin-top: 20px
+
+.favorite-item
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 10px
+
+  .book-info
+    flex: 1
+
+  .remove-btn
+    background-color: #e74c3c
+    color: white
+    border: none
+    padding: 5px 10px
+    border-radius: 5px
+    cursor: pointer
+    transition: background-color 0.3s ease
+
+    &:hover
+      background-color: #c0392b
+
+.no-favorites-message
+  text-align: center
+
+.add-favorites-btn
+  display: block
+  margin: 20px auto
+  background-color: #3498db
+  color: white
+  border: none
+  padding: 10px 20px
+  border-radius: 5px
+  cursor: pointer
+  transition: background-color 0.3s ease

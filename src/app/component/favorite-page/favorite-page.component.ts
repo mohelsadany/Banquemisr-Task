@@ -20,7 +20,8 @@ export class FavoritePageComponent implements OnInit {
   }
 
   removeFavorite(bookKey: string): void {
-    this.favoritesService.removeFavorite(bookKey);
-    this.loadFavorites();
+    // this.favoritesService.removeFavorite(bookKey);
+    this.loadFavorites(); // Refresh the list after removal
   }
 }
+

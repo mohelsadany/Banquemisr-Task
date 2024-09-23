@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/services/open-library.service';
+import { FavoritesService } from 'src/app/services/favorite.service';
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +15,7 @@ export class HomePageComponent implements OnInit {
   booksPerPage = 10;
   totalPages = 0; // Add this line
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private favoritesService: FavoritesService) { }
 
   ngOnInit(): void {
     this.loadBooks();
@@ -33,10 +34,12 @@ export class HomePageComponent implements OnInit {
             subjects: work.subjects || 'No Categories Listed',
             key: work.key,
             edition_count: work.edition_count,
-            first_publish_year: work.first_publish_year
+            first_publish_year: work.first_publish_year,
+            isFavorite: this.favoritesService.isFavorite(work.key)
           }));
           this.totalBooks = data.total; // Assuming API provides a total count
           this.totalPages = Math.ceil(this.totalBooks / this.booksPerPage);
+
         } else {
           this.books = [];
         }
@@ -48,6 +51,11 @@ export class HomePageComponent implements OnInit {
       }
     });
   }
+
+  toggleFavorite(book: any): void {
+    this.favoritesService.toggleFavorite(book);
+    book.isFavorite = this.favoritesService.isFavorite(book.key);
+}
 
   goToPage(page: number): void {
     this.loadBooks(page);

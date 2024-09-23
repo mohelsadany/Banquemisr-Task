@@ -1,10 +1,22 @@
-<div *ngIf="favorites.length; else noFavorites">
-  <div *ngFor="let book of favorites" class="favorite-item">
-    <h3>{{ book.title }}</h3>
-    <p>By {{ book.author_name || 'Unknown Author' }}</p>
-    <button (click)="removeFavorite(book.key)">Remove</button>
+<div class="favorites-container">
+  <h2>My Favorite Books</h2>
+
+  <div *ngIf="favorites.length; else noFavorites" class="favorites-list">
+    <div *ngFor="let book of favorites" class="favorite-item">
+      <div class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p>By {{ book.author_name || 'Unknown Author' }}</p>
+      </div>
+      <button (click)="removeFavorite(book.key)" class="remove-btn">
+        <i class="fas fa-trash"></i> Remove
+      </button>
+    </div>
   </div>
+
+  <ng-template #noFavorites>
+    <p class="no-favorites-message">You haven't added any favorite books yet.</p>
+    <button routerLink="/search" class="add-favorites-btn">
+      <i class="fas fa-search"></i> Search for Books
+    </button>
+  </ng-template>
 </div>
-<ng-template #noFavorites>
-  <p>No favorite books added.</p>
-</ng-template>

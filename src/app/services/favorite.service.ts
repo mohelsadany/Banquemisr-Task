@@ -1,3 +1,4 @@
+// In favorites.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,17 +10,19 @@ export class FavoritesService {
     return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
   }
 
-  addFavorite(book: any): void {
-    const favorites = this.getFavorites();
-    if (!favorites.find(f => f.key === book.key)) {
+  toggleFavorite(book: any): void {
+    let favorites = this.getFavorites();
+    const index = favorites.findIndex(f => f.key === book.key);
+    if (index === -1) {
       favorites.push(book);
-      localStorage.setItem(this.storageKey, JSON.stringify(favorites));
+    } else {
+      favorites.splice(index, 1);
     }
+    localStorage.setItem(this.storageKey, JSON.stringify(favorites));
   }
 
-  removeFavorite(bookKey: string): void {
-    let favorites = this.getFavorites();
-    favorites = favorites.filter(book => book.key !== bookKey);
-    localStorage.setItem(this.storageKey, JSON.stringify(favorites));
+  isFavorite(bookKey: string): boolean {
+    const favorites = this.getFavorites();
+    return favorites.some(book => book.key === bookKey);
   }
 }
