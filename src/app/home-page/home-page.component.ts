@@ -8,31 +8,42 @@ import { BookService } from '../open-library.service';
 })
 export class HomePageComponent implements OnInit {
   books: any[] = [];
+  currentPage = 1;
+  totalBooks = 0;
+  booksPerPage = 10;
 
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.bookService.getBooksBySubject('finance').subscribe({
+    this.loadBooks();
+  }
+  loadBooks(page: number = this.currentPage): void {
+    this.bookService.getBooksBySubject('finance', page, this.booksPerPage).subscribe({
       next: (data) => {
         if (data && data.works) {
           this.books = data.works.map(work => ({
             title: work.title,
-            cover_id: work.cover_id,
-            key: work.key,
-            edition_count: work.edition_count,
-            first_publish_year: work.first_publish_year,
-            authors: work.authors,
-            subject: work.subject.slice(0, 5)  // Taking first 5 subjects
-          })).slice(0, 9);
+            cover_id: work.cover_id,  // Assuming cover_id is directly available
+            cover_url: work.cover_id ? `http://covers.openlibrary.org/b/id/${work.cover_id}-M.jpg` : 'assets/placeholder.jpg',
+            author_name: work.authors ? work.authors.map(author => author.name).join(', ') : 'Unknown Author',
+            subjects: work.subjects || 'No Categories Listed',
+            key: work.key
+          }));
+          this.totalBooks = data.total; // Assuming API provides a total count
+          this.currentPage = page;
         } else {
-          console.error('No books returned from API.');
           this.books = [];
+          console.error('No books returned from API.');
         }
-        console.log('Books loaded successfully:', this.books);
       },
       error: (error) => {
         console.error('Failed to fetch books:', error);
+        this.books = [];
       }
     });
+  }
+
+  goToPage(page: number): void {
+    this.loadBooks(page);
   }
 }

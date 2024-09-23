@@ -9,8 +9,12 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooksBySubject(subject: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/subjects/${subject}.json`);
+
+  getBooksBySubject(subject: string, page: number = 1, limit: number = 10): Observable<any> {
+    const params = new HttpParams()
+      .set('offset', `${(page - 1) * limit}`)
+      .set('limit', `${limit}`);
+    return this.http.get(`${this.baseUrl}/subjects/${subject}.json`, { params });
   }
 
   getBookDetails(bookKey: string): Observable<any> {

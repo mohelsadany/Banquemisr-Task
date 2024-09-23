@@ -19,7 +19,13 @@
       </div>
     </div>
   </div>
+  <div class="pagination">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }}</span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage * booksPerPage >= totalBooks">Next</button>
+  </div>
 </div>
+
 <ng-template #noBooks>
   <p>No books found.</p>
 </ng-template>
