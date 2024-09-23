@@ -8,12 +8,14 @@ import { BookService } from 'src/app/services/open-library.service';
   styleUrls: ['./book-details.component.sass']
 })
 export class BookDetailsComponent implements OnInit {
-  book: any = null;  // Initialize to null to handle conditional rendering
+  book: any = null;
+  isLoading = false;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.isLoading = true;
       this.bookService.getBookDetails('/works/' + params['id']).subscribe({
         next: (data) => {
           this.book = {
@@ -24,9 +26,11 @@ export class BookDetailsComponent implements OnInit {
             subjects: data.subjects || [],
             description: data.description ? data.description.value || data.description : 'No description available.'
           };
+          this.isLoading = false;
         },
         error: (error) => {
           console.error('Failed to fetch book details:', error);
+          this.isLoading = false;
         }
       });
     });
