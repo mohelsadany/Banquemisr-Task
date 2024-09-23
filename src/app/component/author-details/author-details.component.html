@@ -1,6 +1,10 @@
-<div *ngIf="author; else loading">
+<div *ngIf="isLoading" class="loader"></div>
+<div *ngIf="author; else isLoading">
   <div class="author-detail-card">
-    <h2>{{ author.name }}</h2>
+    <div class="author-header">
+      <img [src]="author.profile_picture ? author.profile_picture : 'assets/images/no-photo.jpg'" [alt]="author.name" class="author-profile-picture" >
+      <h2>{{ author.name }}</h2>
+    </div>
     <p><strong>Birth Date:</strong> {{ author.birth_date }}</p>
     <p><strong>Biography:</strong> {{ author.bio }}</p>
     <div>
@@ -13,8 +17,13 @@
       <h3>Subjects:</h3>
       <span *ngFor="let subject of author.subjects">{{ subject }}, </span>
     </div>
+    <div *ngIf="author.social_links">
+      <h3>Social Media:</h3>
+      <ul>
+        <li *ngFor="let link of author.social_links">
+          <a [href]="link.url" target="_blank">{{ link.platform }}</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
-<ng-template #loading>
-  <p>Loading author details...</p>
-</ng-template>

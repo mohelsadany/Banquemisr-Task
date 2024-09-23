@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
   currentPage = 1;
   totalBooks = 0;
   booksPerPage = 10;
-  totalPages = 0; // Add this line
+  totalPages = 0;
 
   constructor(private bookService: BookService, private favoritesService: FavoritesService) { }
 
@@ -37,9 +37,9 @@ export class HomePageComponent implements OnInit {
             first_publish_year: work.first_publish_year,
             isFavorite: this.favoritesService.isFavorite(work.key)
           }));
-          this.totalBooks = data.total; // Assuming API provides a total count
+          this.totalBooks = data.work_count;
           this.totalPages = Math.ceil(this.totalBooks / this.booksPerPage);
-
+          console.log("Total pages:", this.booksPerPage);
         } else {
           this.books = [];
         }
@@ -57,7 +57,21 @@ export class HomePageComponent implements OnInit {
     book.isFavorite = this.favoritesService.isFavorite(book.key);
 }
 
-  goToPage(page: number): void {
-    this.loadBooks(page);
+goToPreviousPage(): void {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.loadBooks(this.currentPage);
   }
+}
+
+goToPage(page: number): void {
+  this.loadBooks(page);
+}
+
+goToNextPage(): void {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+    this.loadBooks(this.currentPage);
+  }
+}
 }

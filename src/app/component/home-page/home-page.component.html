@@ -1,50 +1,99 @@
 <main class="home-page">
   <h1 class="visually-hidden">Book Catalog</h1>
+
   <div *ngIf="isLoading" class="loader"></div>
-  <div *ngIf="books.length; isLoading">
+
+  <div *ngIf="!isLoading && books.length > 0">
     <div class="grid-container">
       <article *ngFor="let book of books" class="book-card">
-        <a [routerLink]="['/book', book.key.split('/').pop()]" class="book-cover-link">
-          <img [src]="book.cover_id ? 'http://covers.openlibrary.org/b/id/' + book.cover_id + '-M.jpg' : 'assets/images/no-photo.jpg'"
-               [alt]="'Cover of ' + book.title"
-               class="book-cover"
-               loading="lazy">
+        <a
+          [routerLink]="['/book', book.key.split('/').pop()]"
+          class="book-cover-link"
+        >
+          <img
+            [src]="
+              book.cover_id
+                ? 'http://covers.openlibrary.org/b/id/' +
+                  book.cover_id +
+                  '-M.jpg'
+                : 'assets/images/no-photo.jpg'
+            "
+            [alt]="'Cover of ' + book.title"
+            class="book-cover"
+            loading="lazy"
+          />
         </a>
         <div class="book-info">
           <h2 class="book-title">
-            <a [routerLink]="['/book', book.key.split('/').pop()]">{{ book.title }}</a>
+            <a [routerLink]="['/book', book.key.split('/').pop()]">{{
+              book.title
+            }}</a>
           </h2>
           <p class="book-meta">
-            <span class="book-editions">{{ book.edition_count }} edition{{ book.edition_count !== 1 ? 's' : '' }}</span>
-            <span class="book-year">First published: {{ book.first_publish_year || 'Unknown' }}</span>
+            <span class="book-editions"
+              >{{ book.edition_count }} edition{{
+                book.edition_count !== 1 ? "s" : ""
+              }}</span
+            >
+            <span class="book-year"
+              >First published: {{ book.first_publish_year || "Unknown" }}</span
+            >
           </p>
           <div class="book-authors">
             <span *ngFor="let author of book.authors; let last = last">
-              <a [routerLink]="['/author', author.key.split('/').pop()]" class="author-link">{{ author.name }}</a>{{ !last ? ', ' : '' }}
+              <a
+                [routerLink]="['/author', author.key.split('/').pop()]"
+                class="author-link"
+                >{{ author.name }}</a
+              >{{ !last ? ", " : "" }}
             </span>
+            <span class="author-name">{{ author_name }}</span> <!-- Added author_name here -->
           </div>
-          <div class="book-subjects" *ngIf="book.subject && book.subject.length">
+          <div
+            class="book-subjects"
+            *ngIf="book.subject && book.subject.length"
+          >
             <h3 class="visually-hidden">Subjects</h3>
             <ul class="subject-list">
-              <li *ngFor="let subject of book.subject.slice(0, 3)" class="book-subject">{{ subject }}</li>
+              <li
+                *ngFor="let subject of book.subject.slice(0, 3)"
+                class="book-subject"
+              >
+                {{ subject }}
+              </li>
             </ul>
           </div>
+          <button
+            (click)="toggleFavorite(book)"
+            [class.favorited]="book.isFavorite"
+          >
+            <i
+              class="fa"
+              [class.fa-heart]="book.isFavorite"
+              [class.fa-heart-o]="!book.isFavorite"
+            ></i>
+          </button>
         </div>
-        <button (click)="toggleFavorite(book)" [class.favorited]="book.isFavorite">
-          <i class="fa" [class.fa-heart]="book.isFavorite" [class.fa-heart-o]="!book.isFavorite"></i>
-        </button>
       </article>
     </div>
-
     <nav class="pagination" aria-label="Pagination">
-      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" aria-label="Go to previous page">
+      <button
+        (click)=" goToPreviousPage()"
+        [disabled]="currentPage === 1"
+        aria-label="Go to previous page"
+      >
         <span aria-hidden="true">&laquo;</span> Previous
       </button>
-      <span class="current-page">Page {{ currentPage }} of {{ totalPages }}</span>
-      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage * booksPerPage >= totalBooks" aria-label="Go to next page">
+      <span class="current-page"
+        >Page {{ currentPage }} of {{ totalPages }}</span
+      >
+      <button
+        (click)="goToNextPage()"
+        [disabled]="currentPage >= totalPages"
+        aria-label="Go to next page"
+      >
         Next <span aria-hidden="true">&raquo;</span>
       </button>
     </nav>
   </div>
-
 </main>

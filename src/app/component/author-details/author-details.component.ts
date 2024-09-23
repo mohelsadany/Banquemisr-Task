@@ -8,7 +8,8 @@ import { BookService } from 'src/app/services/open-library.service';
   styleUrls: ['./author-details.component.sass']
 })
 export class AuthorDetailsComponent implements OnInit {
-  author: any = null;  // Initialize to null for conditional rendering
+  author: any = null;
+  isLoading: boolean = true;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
@@ -16,6 +17,7 @@ export class AuthorDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.bookService.getAuthorDetails(`/authors/${params['id']}`).subscribe({
         next: (data) => {
+          this.isLoading = false;
           this.author = {
             name: data.name,
             bio: data.bio ? data.bio.value || data.bio : 'No biography available.',
@@ -26,6 +28,7 @@ export class AuthorDetailsComponent implements OnInit {
         },
         error: (error) => {
           console.error('Failed to fetch author details:', error);
+          this.isLoading = false;
         }
       });
     });
