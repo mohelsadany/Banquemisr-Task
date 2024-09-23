@@ -1,24 +1,23 @@
-<form (submit)="performSearch(searchTerm.value)">
-  <input type="text" #searchTerm placeholder="Enter search term..." />
-
-  <!-- <select [(ngModel)]="sortOption" name="sort">
+<div class="search-controls">
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search books...">
+  <select [(ngModel)]="sortOption">
     <option value="relevance">Relevance</option>
     <option value="new">Newest</option>
     <option value="old">Oldest</option>
   </select>
-
-  <select [(ngModel)]="filterSubject" name="filter">
+  <select [(ngModel)]="filterSubject">
     <option value="">All Subjects</option>
     <option value="Fiction">Fiction</option>
     <option value="Science">Science</option>
-    <option value="History">History</option>
-  </select> -->
+  </select>
+  <button (click)="performSearch(searchTerm)">Search</button>
+</div>
 
-  <button type="submit">Search</button>
-</form>
-
-<div *ngIf="searchResults">
-  <div *ngFor="let book of searchResults">
-    <p>{{ book.title }} by {{ book.author_name.join(', ') }}</p>
+<div *ngIf="searchResults.length; else noResults">
+  <div *ngFor="let book of searchResults" class="search-result-item">
+    <p>{{ book.title }} by {{ book.author_name || 'Unknown Author' }}</p>
   </div>
 </div>
+<ng-template #noResults>
+  <p>No results found.</p>
+</ng-template>

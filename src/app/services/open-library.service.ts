@@ -34,9 +34,7 @@ export class BookService {
   }
 
   searchBooks(term: string, sort: string = 'relevance', filter?: string): Observable<any> {
-    let params = new HttpParams()
-      .set('q', term)
-      .set('sort', sort);
+    let params = new HttpParams().set('q', term).set('sort', sort);
 
     if (filter) {
       params = params.set('subject', filter);
@@ -44,4 +42,6 @@ export class BookService {
 
     return this.http.get(`${this.baseUrl}/search.json`, { params });
   }
+
+
 }
