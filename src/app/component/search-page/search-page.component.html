@@ -4,11 +4,24 @@
     <option value="relevance">Relevance</option>
     <option value="new">Newest</option>
     <option value="old">Oldest</option>
+    <option value="author">Author</option>
+    <option value="title">Title</option>
+    <option value="subject">Subject</option>
   </select>
   <select [(ngModel)]="filterSubject">
     <option value="">All Subjects</option>
     <option value="Fiction">Fiction</option>
     <option value="Science">Science</option>
+    <option value="History">History</option>
+    <option value="Biography">Biography</option>
+    <option value="Travel">Travel</option>
+    <option value="Cooking">Cooking</option>
+    <option value="Art">Art</option>
+    <option value="Music">Music</option>
+    <option value="Film">Film</option>
+    <option value="Science Fiction">Science Fiction</option>
+    <option value="Fantasy">Fantasy</option>
+
   </select>
   <button (click)="performSearch(searchTerm)">Search</button>
 </div>

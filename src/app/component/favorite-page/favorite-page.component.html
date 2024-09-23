@@ -1,1 +1,10 @@
-<p>favorite-page works!</p>
+<div *ngIf="favorites.length; else noFavorites">
+  <div *ngFor="let book of favorites" class="favorite-item">
+    <h3>{{ book.title }}</h3>
+    <p>By {{ book.author_name || 'Unknown Author' }}</p>
+    <button (click)="removeFavorite(book.key)">Remove</button>
+  </div>
+</div>
+<ng-template #noFavorites>
+  <p>No favorite books added.</p>
+</ng-template>
