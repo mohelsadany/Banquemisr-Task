@@ -3,8 +3,9 @@
     <li><a routerLink="/home">Home</a></li>
     <li><a routerLink="/search">Search</a></li>
     <li>
-      <a routerLink="/favorite">
-        Favorite <span *ngIf="favoriteCount > 0">({{ favoriteCount }})</span>
+      <a routerLink="/favorite" class="favorite-link">
+        Favorite
+        <span class="favorite-count" *ngIf="favoriteCount > 0">{{ favoriteCount }}</span>
       </a>
     </li>
   </ul>
