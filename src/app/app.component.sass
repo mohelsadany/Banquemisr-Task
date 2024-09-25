@@ -23,3 +23,43 @@ nav
     &:hover
       color: #007bff // Changed to a blue color instead of underline
       text-decoration: none // Removed underline on hover
+
+.favorite-link
+  position: relative
+
+  .favorite-count
+    position: absolute
+    top: -10px
+    right: -10px
+    background-color: #ff4500
+    color: white
+    padding: 2px 6px
+    border-radius: 50%
+    font-size: 12px
+    font-weight: bold
+
+  &:hover
+    color: #ff4500
+    text-decoration: none
+
+  &:active
+    transform: scale(0.95)
+    transition: transform 0.2s ease
+
+.content
+  padding: 2rem
+
+  .favorite-link
+    position: relative
+
+    .favorite-count
+      position: absolute
+      top: -10px
+      right: -10px
+      background-color: #ff4500
+
+      color: white
+      padding: 2px 6px
+      border-radius: 50%
+      font-size: 12px
+      font-weight: bold
