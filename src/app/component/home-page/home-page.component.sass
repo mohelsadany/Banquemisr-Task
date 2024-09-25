@@ -144,35 +144,29 @@ button
   border: none
   cursor: pointer
   outline: none
-  font-size: 24px
-  transition: color 0.2s ease, transform 0.2s ease
+  padding: 8px
+  transition: transform 0.2s ease
   z-index: 1000
 
   &::before
     content: '\2665'
-    color: white
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5)
-    opacity: 0.5
+    font-size: 28px
+    color: #ffffff
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
     transition: color 0.2s ease, transform 0.2s ease
-    position: absolute
-    top: 10px
-    right: 10px
-    font-size: 24px
-    z-index: 1000
-    transform: scale(0.8)
 
   &:hover
     transform: scale(1.1)
-    opacity: 1
-    transition: color 0.2s ease, transform 0.2s ease
+
+    &::before
+      color: #ff6b6b
 
   &.favorited::before
-    color: #e74c3c
+    color: #ff6b6b
     transform: scale(1.1)
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5)
-    opacity: 1
-    transition: color 0.2s ease, transform 0.2s ease
 
+  &:active
+    transform: scale(0.95)
 
 // Media queries for responsiveness
 @media (max-width: 1200px)

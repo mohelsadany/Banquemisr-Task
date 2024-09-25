@@ -66,12 +66,11 @@
           <button
             (click)="toggleFavorite(book)"
             [class.favorited]="book.isFavorite"
+            class="favorite-btn"
+            [attr.aria-label]="book.isFavorite ? 'Remove from favorites' : 'Add to favorites'"
           >
-            <i
-              class="fa"
-              [class.fa-heart]="book.isFavorite"
-              [class.fa-heart-o]="!book.isFavorite"
-            ></i>
+            <i class="fa" [class.fa-heart]="book.isFavorite" [class.fa-heart-o]="!book.isFavorite"></i>
+            <span class="favorite-text">{{ book.isFavorite ? 'Favorited' : 'Favorite' }}</span>
           </button>
         </div>
       </article>

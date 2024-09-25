@@ -25,4 +25,10 @@ export class FavoritesService {
     const favorites = this.getFavorites();
     return favorites.some(book => book.key === bookKey);
   }
+
+  removeFavorite(bookKey: string): void {
+    let favorites = this.getFavorites();
+    favorites = favorites.filter(book => book.key !== bookKey);
+    localStorage.setItem(this.storageKey, JSON.stringify(favorites));
+  }
 }
