@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FavoritesService } from './services/favorite.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'task';
+  favoriteCount: number = 0;
+
+  constructor(private favoritesService: FavoritesService) {}
+
+  ngOnInit(): void {
+    this.favoritesService.favorites$.subscribe(favorites => {
+      this.favoriteCount = favorites.length;
+    });
+  }
 }
